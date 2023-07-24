@@ -6,6 +6,6 @@ const validate = (req, res, next) => {
     } else {
         res.send({ "status": "NO", "msg": "Unauthorized Please Login First" });
     }
-}
+};
 
 module.exports = { validate };

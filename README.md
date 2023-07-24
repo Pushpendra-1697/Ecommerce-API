@@ -40,6 +40,13 @@ password --> String
   product_type: String,
   quantity: Number,
 
+3) carts:
+Collection Name : carts
+  userId : ObjectId as ref=user
+  products: [{productId: ObjectId as ref=product, quantity: Number}]
+  active: Boolean,
+  modifiedOn: Date
+
 
 # Routes / End Points
 1) /users/register:
@@ -76,7 +83,39 @@ Output: Retrieves all products
 5) /products/particularProduct/`${id}`
 output: Retrieves Particular products by id
 
+# NOTE:  For Below routes pass the token from headers (Required)
+6) /cart/addToCart: update quantities
+Input Sample: 
+  "productId":"64be95a1f0dd493feb5c8210",
+  "qty": 3
 
+Output:  
+{
+  "msg": "Product added in cart",
+  "cart": {
+    "userId": "64be861288ff9ba7252aa32e",
+    "products": [
+      {
+        "productId": "64be95a1f0dd493feb5c8210",
+        "quantity": 1,
+        "_id": "64beab3bd64361dbbb125fa1"
+      }
+    ],
+    "active": true,
+    "_id": "64beab3bd64361dbbb125fa0",
+    "modifiedOn": "2023-07-24T16:47:55.609Z",
+    "createdAt": "2023-07-24T16:47:55.612Z",
+    "updatedAt": "2023-07-24T16:47:55.612Z"
+  }
+}
 
+7) /cart/deleteFromCart:
+Input Sample: 
+  productId: "64be95a1f0dd493feb5c8210"
+  cartId: "64bebf684ac081d8292327a8"
 
+Output: Particular Product will be deleted
+
+8) /cart/fetchCartItems:
+It will populate all cart Items || Empty Cart
 
