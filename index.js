@@ -8,6 +8,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3000; //defined port 8080 (default 3000) excluding 27017 (reserved port by Mongod);
 
 //Different Routers for different frontend pages in UI;
+const { userRouter } = require("./Routes/users.route");
 
 
 //Inbuilt middlewares;
@@ -21,7 +22,7 @@ app.get("/", async (req, res) => {
 });
 
 //Fixed starting end points for making nested dynamic route;
-
+app.use('/users', userRouter);
 
 
 //server code for start or live my server at defined port;
