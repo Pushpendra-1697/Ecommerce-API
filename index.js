@@ -23,6 +23,7 @@ app.get("/", async (req, res) => {
 //Fixed starting end points for making nested dynamic route;
 
 
+
 //server code for start or live my server at defined port;
 httpServer.listen(PORT, async () => {
     try {
