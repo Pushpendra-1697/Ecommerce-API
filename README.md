@@ -23,75 +23,116 @@ ecommerce
 1) Users: 
 Collection Name : users
 
-name --> String
-password --> String
+  name --> String
+
+  password --> String
 
 2) products:
   Collection Name : products
 
   id: Number,
+  
   brand: String,
+  
   name: String,
+  
   price: Number,
+  
   price_sign: String,
+  
   image_link: String,
+  
   image_link1: String,
+  
   description: String,
+  
   rating: Number,
+  
   review: Number,
+  
   category: String,
+  
   product_type: String,
+  
   quantity: Number,
 
 3) carts:
 Collection Name : carts
+
   userId : ObjectId as ref=user
+
   products: [{productId: ObjectId as ref=product, quantity: Number, default:1}]
+  
   active: Boolean, default: true
+  
   modifiedOn: Date, default: Date.now
 
-4) orders:
+5) orders:
 Collection Name : orders
 
   userId : ObjectId as ref=user
+  
   cartId : ObjectId as ref=cart
+  
   status : Array
+  
   currentStatus : String
-  priceTotal: Number,
-  paymentMethod: String,
-  DeliveryAdress: String,
-  OrderDelivered: Boolean, default: false ,
+  
+  priceTotal: Number
+  
+  paymentMethod: String
+  
+  DeliveryAdress: String
+  
+  OrderDelivered: Boolean, default: false
+  
   DeliveryDate: String,
 
 
 # Routes / End Points
 1) /users/register: (POST)
+
 Sample Input: 
+
  name: "Pushpendra Singh"
+
  password: "Push1697@"
+ 
 Output: Success Message and data will store in mongodb
 
-2) /users/login: (POST)
+3) /users/login: (POST)
 if you use same existing details for login then you got jwt token, Login Successfully Message and user_id
 else you got Wrong Password || Wrong Username || Login failed (according to your wrong credential)
 
 Sample Input: 
+
  name: "Pushpendra Singh"
+ 
  password: "Push1697@"
+ 
 Output: Success Message and jwt token
 
 Sample Input: 
+
  name: "Pushpendra"
+ 
  password: "Push1697@"
+ 
 Output: Wrong Username
 
 Sample Input: 
+
  name: "Pushpendra Singh"
+ 
  password: "Push"
+ 
 Output: Wrong Password
 
 3) /products/addProduct: (POST)
+
 Sample Input:
+
+  {
   "id": 922,
   "brand": "nyx",
   "name": "High Definition Blush Pro Refills",
@@ -105,6 +146,7 @@ Sample Input:
   "category": "concealer",
   "product_type": "blush",
   "quantity": 5
+  }
 
 Output: Success Message and data will store in mongodb
 
