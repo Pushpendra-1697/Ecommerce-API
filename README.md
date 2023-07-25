@@ -2,7 +2,10 @@
 # Overview
 This project will deliver a comprehensive e-commerce API set that enables seamless product and category management, user authentication, secure cart management, and order processing. The integration of Mongodb as the database and token management system ensures efficient data storage and user authentication with minimal server-side setup.
 
-## Installation
+# Live/deploy link on render
+
+
+## Installation & Tech Stack
 
 Clone the Repository from Github. Then do the following steps:
 
@@ -15,6 +18,15 @@ Clone the Repository from Github. Then do the following steps:
 ```bash
     npm run server
 ```
+
+# Some HTTP (Hyper Text Transfer Protocol) Status Code Which I used :
+404 ---> Not Found/failure
+
+200 --->  OK/Success/get/put
+
+201 ---> Created/post
+
+204 ----> Delete/reject
 
 # NOTE: Used Timestamps & Date datatypes which allow by BSON.
 
