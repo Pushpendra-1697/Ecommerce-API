@@ -34,7 +34,7 @@ Clone the Repository from Github. Then do the following steps:
 ecommerce
 # Schema
 
-1) Users:
+#### 1) *Users*:
 
 Collection Name : users
 
@@ -42,7 +42,7 @@ Collection Name : users
 
 - password --> String
 
-2) products:
+#### 2) *products*:
   Collection Name : products
 
    - id: Number,
@@ -71,7 +71,7 @@ Collection Name : users
   
    - quantity: Number,
 
-3) carts:
+#### 3) *carts*:
 Collection Name : carts
 
   - userId : ObjectId as ref=user
@@ -82,7 +82,7 @@ Collection Name : carts
   
  - modifiedOn: Date, default: Date.now
 
-5) orders:
+#### 4) *orders*:
 Collection Name : orders
 
  - userId : ObjectId as ref=user
