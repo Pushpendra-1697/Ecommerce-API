@@ -20,13 +20,13 @@ Clone the Repository from Github. Then do the following steps:
 ```
 
 ## Some HTTP (Hyper Text Transfer Protocol) Status Code Which I used :
-404 ---> Not Found/failure
+     404 ---> Not Found/failure
 
-200 --->  OK/Success/get/put
+     200 --->  OK/Success/get/put
 
-201 ---> Created/post
+     201 ---> Created/post
 
-204 ----> Delete/reject
+     204 ----> Delete/reject
 
 ### NOTE: Used Timestamps & Date datatypes which allow by BSON.
 
@@ -38,38 +38,38 @@ ecommerce
 
 Collection Name : users
 
-          name --> String
+- name --> String
 
-          password --> String
+- password --> String
 
 2) products:
   Collection Name : products
 
-         id: Number,
+   - id: Number,
   
-         brand: String,
+   - brand: String,
   
-         name: String,
+   - name: String,
   
-        price: Number,
+   - price: Number,
   
-        price_sign: String,
+   - price_sign: String,
   
-        image_link: String,
+   - image_link: String,
   
-        image_link1: String,
+   - image_link1: String,
   
-        description: String,
+   - description: String,
   
-       rating: Number,
+   - rating: Number,
   
-       review: Number,
+   - review: Number,
   
-       category: String,
+   - category: String,
   
-       product_type: String,
+   - product_type: String,
   
-       quantity: Number,
+   - quantity: Number,
 
 3) carts:
 Collection Name : carts
