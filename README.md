@@ -13,6 +13,9 @@ Clone the Repository from Github. Then do the following steps:
 ```bash
     npm run server
 ```
+
+# NOTE: Used Timestamps & Date datatypes which allow by BSON.
+
 # Database Name:
 ecommerce
 # Schema
@@ -43,9 +46,24 @@ password --> String
 3) carts:
 Collection Name : carts
   userId : ObjectId as ref=user
-  products: [{productId: ObjectId as ref=product, quantity: Number}]
-  active: Boolean,
-  modifiedOn: Date
+  products: [{productId: ObjectId as ref=product, quantity: Number, default:1}]
+  active: Boolean, default: true
+  modifiedOn: Date, default: Date.now
+
+4) orders:
+Collection Name : orders
+
+  userId : ObjectId as ref=user
+  cartId : ObjectId as ref=cart
+  status : Array
+  currentStatus : String
+  priceTotal: Number,
+  paymentMethod: String,
+  DeliveryAdress: String,
+  OrderDelivered: Boolean, default: false ,
+  DeliveryDate: String,
+
+
 
 
 # Routes / End Points
@@ -58,6 +76,21 @@ Output: Success Message and data will store in mongodb
 2) /users/login:
 if you use same existing details for login then you got jwt token, Login Successfully Message and user_id
 else you got Wrong Password || Wrong Username || Login failed (according to your wrong credential)
+
+Sample Input: 
+ name: "Pushpendra Singh"
+ password: "Push1697@"
+Output: Success Message and jwt token
+
+Sample Input: 
+ name: "Pushpendra"
+ password: "Push1697@"
+Output: Wrong Username
+
+Sample Input: 
+ name: "Pushpendra Singh"
+ password: "Push"
+Output: Wrong Password
 
 3) /products/addProduct:
 Sample Input:
@@ -82,6 +115,10 @@ Output: Retrieves all products
 
 5) /products/particularProduct/`${id}`
 output: Retrieves Particular products by id
+
+# NOTE : Ignore Payment Gateway Methods API like Razorpay, Braintree etc.
+
+6) 
 
 # NOTE:  For Below routes pass the token from headers (Required)
 6) /cart/addToCart: update quantities

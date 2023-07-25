@@ -46,7 +46,7 @@ cartRouter.post("/addToCart", async (req, res) => {
                 cart.products.push({ productId });
             }
             await cart.save();
-            res.status(201).send({ msg: 'Product added in cart', cart });
+            res.status(201).send({ msg: 'Product added in cart with quentity updated', cart });
         }
     } catch (err) {
         res.status(404).send({ Error: err.message });
