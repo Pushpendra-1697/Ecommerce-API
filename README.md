@@ -107,46 +107,46 @@ Collection Name : orders
 # Routes / End Points
 #### 1. */users/register*: (POST)
 
-Sample Input: 
+###### Sample Input: 
 
  name: "Pushpendra Singh"
 
  password: "Push1697@"
  
-Output: Success Message and data will store in mongodb
+##### Output: Success Message and data will store in mongodb
 
 #### 2.  */users/login*: (POST)
 
 if you use same existing details for login then you got jwt token, Login Successfully Message and user_id
 else you got Wrong Password || Wrong Username || Login failed (according to your wrong credential)
 
-Sample Input: 
+##### Sample Input: 
 
  name: "Pushpendra Singh"
  
  password: "Push1697@"
  
-Output: Success Message and jwt token
+##### Output: Success Message and jwt token
 
-Sample Input: 
+##### Sample Input: 
 
  name: "Pushpendra"
  
  password: "Push1697@"
  
-Output: Wrong Username
+##### Output: Wrong Username
 
-Sample Input: 
+##### Sample Input: 
 
  name: "Pushpendra Singh"
  
  password: "Push"
  
-Output: Wrong Password
+##### Output: Wrong Password
 
 #### 3) */products/addProduct*: (POST)
 
-Sample Input:
+##### Sample Input:
 
   {
   "id": 922,
@@ -164,23 +164,23 @@ Sample Input:
   "quantity": 5
   }
 
-Output: Success Message and data will store in mongodb
+##### Output: Success Message and data will store in mongodb
 
 #### 4) */products/allProducts*: (GET)
-Output: Retrieves all products
+##### Output: Retrieves all products
 
 #### 5) */products/particularProduct/`${id}`*: (GET)
-output: Retrieves Particular products by id
+##### output: Retrieves Particular products by id
 
 ## NOTE:  For Below routes pass the token from headers (Required)
 
 #### 6) */cart/addToCart: update quantities* --> (POST)
 
-Input Sample: 
+##### Input Sample: 
   "productId":"64be95a1f0dd493feb5c8210",
   "qty": 3
 
-Output:  
+##### Output:  
 {
   "msg": "Product added in cart",
   "cart": {
@@ -202,11 +202,11 @@ Output:
 
 #### 7) */cart/deleteFromCart*: (DELETE)
 
-Input Sample: 
+##### Input Sample: 
   productId: "64be95a1f0dd493feb5c8210"
   cartId: "64bebf684ac081d8292327a8"
 
-Output: Particular Product will be deleted
+##### Output: Particular Product will be deleted
 
 #### 8) */cart/fetchCartItems*: (GET)
 It will populate all cart Items || Empty Cart
@@ -215,7 +215,8 @@ It will populate all cart Items || Empty Cart
 
 #### 9) */order/orderPlaced*: (POST)
 
-Input Sample: 
+##### Input Sample: 
+
 {
   "cartId": "64bebf684ac081d8292327a8",
   "priceTotal": 36, 
@@ -223,7 +224,8 @@ Input Sample:
   "DeliveryAdress":"Kanpur UP"
 }
 
-Output: 
+##### Output: 
+
 {
   "msg": "OK",
   "newOrder": {
@@ -257,25 +259,29 @@ Used to get particular order's Details of any authenticated particular user by o
 
 Used for Change order's current Status by Admin --> This person should have token + role=="admin"
 
-Input Sample-1: 
+##### Input Sample-1: 
+
 {
   "status": "Delivered",
   "orderId": "64bf4d78a141a7319b7aa1e7"
 }
 
-Output-1: 
+##### Output-1: 
+
 {
   "msg": "Status of order has been changed",
   "status": "Delivered"
 }
 
-Input Sample-2: 
+##### Input Sample-2: 
+
 {
   "status": "Shipping",
   "orderId": "64bf4d78a141a7319b7aa1e7"
 }
 
-Output-2: 
+##### Output-2: 
+
 {
   "msg": "Status of order has been changed",
   "status": "Shipping"
@@ -296,7 +302,7 @@ API RATE LIMIT use for amount of time and no.of req valid for yr app
 
 middleware --> express-rate-limit
 
-Example: 
+##### Example: 
 const limiter = rateLimit({
     max: 2, //no. of req users can make with in time
     windowMs: 60000  // time frame in (ms)
