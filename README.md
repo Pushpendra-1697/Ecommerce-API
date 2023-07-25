@@ -14,7 +14,7 @@ Clone the Repository from Github. Then do the following steps:
 
     npm i express mongoose cors bcrypt dotenv jsonwebtoken nodemon express-rate-limit
 ```
-# To run server (PORT = 8080)
+## To run server (PORT = 8080)
 ```bash
     npm run server
 ```
@@ -30,7 +30,7 @@ Clone the Repository from Github. Then do the following steps:
 
 ### NOTE: Used Timestamps & Date datatypes which allow by BSON.
 
-# Database Name:
+## Database Name:
 ecommerce
 # Schema
 
