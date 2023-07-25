@@ -181,5 +181,46 @@ Output:
   }
 }
 
+10) /order/orderHistory : (GET)
+Used to get all orders of authenticated users (notDelivered orders)
+
+11) /order/orderDetails : (GET)
+Used to get particular order's Details of any authenticated particular user by order's ID (notDelivered order)
+
+# NOTE: Some Extra Routes
+
+12) /order/changeStatusOfOrder: (POST)
+Used for Change order's current Status by Admin --> This person should have token + role=="admin"
+
+Input Sample-1: 
+{
+  "status": "Delivered",
+  "orderId": "64bf4d78a141a7319b7aa1e7"
+}
+
+Output-1: 
+{
+  "msg": "Status of order has been changed",
+  "status": "Delivered"
+}
+
+Input Sample-2: 
+{
+  "status": "Shipping",
+  "orderId": "64bf4d78a141a7319b7aa1e7"
+}
+
+Output-2: 
+{
+  "msg": "Status of order has been changed",
+  "status": "Shipping"
+}
+
+13) /order/getDeliveredOrders : (GET)
+Used to get all the orders  list  of delivered item which have OrderDelivered===true
+
+
+14) /order/getNotDeliveredOrders : (GET)
+Used to get all the orders  list  of Not-delivered item which have OrderDelivered===false
 
 

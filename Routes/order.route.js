@@ -1,75 +1,39 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const OrderModel = require("../Models/order.model");
+const { adminChecker } = require("../Middlewares/adminChecker.middleware");
 const orderRouter = Router();
 
+// *********************   Get all orders of authenticated users  *********************
+orderRouter.get("/orderHistory", async (req, res) => {
+    try {
+        let orders = await OrderModel.find().populate({
+            path: "cartId",
+            populate: { path: "products", populate: "productId" },
+        });
+        res.status(201).send({ orders, msg: "OK" });
+    } catch (err) {
+        res.status(404).send({ Error: err.message });
+    }
+});
 
-// orderRouter.get("/getall", async (req, res) => {
-//     const { token } = req.headers;
-//     try {
-//         let delivered = await OrderModel.find().populate({
-//             path: "cartId",
-//             populate: { path: "products", populate: "productId" },
-//         });
-//         return res.status(201).send({ delivered, Message: "OK" });
-//     } catch (e) {
-//         return res.send({ "msg": "Some thing went wrong" });
-//     }
-// });
 
-// // Get all the order  list  of delivered item *************
-// orderRouter.get("/getdeliveredorder", async (req, res) => {
-//     let { token } = req.headers;
-//     try {
-//         let delivered = await OrderModel.find({ OrderDelivered: true }).populate({
-//             path: "cartId",
-//             populate: { path: "products", populate: "productId" },
-//         });
-//         return res.status(201).send({ delivered, Message: "OK" });
-//     } catch (e) {
-//         return res.send("Some thing went wrong");
-//     }
-// });
+// ********************* Get Order details of particluar authenticated user by particular order Id (notDelivered order) *********************
+orderRouter.get("/orderDetails", async (req, res) => {
+    let { token } = req.headers;
+    token = jwt.decode(token, process.env.secret_key);
+    let userId = token.id;
 
-// // Get list of Order Which is Not delivered
-// orderRouter.get("/getnotdelivered", async (req, res) => {
-//     let { token } = req.headers;
-//     try {
-//         let notDelivered = await OrderModel.find({
-//             OrderDelivered: false,
-//         }).populate({
-//             path: "cartId",
-//             populate: { path: "products", populate: "productId" },
-//         });
-//         return res.status(201).send({ notDelivered, Message: "OK" });
-//     } catch (e) {
-//         return res.send("Some thing went wrong");
-//     }
-// });
-
-// // Get Order details of particluar user with particular order Id
-
-// orderRouter.get("/getnotdeliveredofuser/", async (req, res) => {
-//     let { token } = req.headers;
-
-//     token = jwt.verify(token, process.env.token_password);
-//     let userId = token.id;
-
-//     try {
-//         let notDelivered = await OrderModel.find({
-//             //   OrderDelivered: false ,
-//             userId,
-//             //   _id: id,
-//         }).populate({
-//             path: "cartId",
-//             populate: { path: "products", populate: "productId" },
-//         });
-
-//         return res.status(201).send({ notDelivered, Message: "OK" });
-//     } catch (e) {
-//         return res.send("Some thing went wrong");
-//     }
-// });
+    try {
+        let notDelivered = await OrderModel.find({ userId }).populate({
+            path: "cartId",
+            populate: { path: "products", populate: "productId" },
+        });
+        res.status(201).send({ notDelivered, msg: "OK" });
+    } catch (err) {
+        res.status(404).send({ Error: err.message });
+    }
+});
 
 // *********************  orderconfirmed / Order Placement *********************
 orderRouter.post("/orderPlaced", async (req, res) => {
@@ -101,27 +65,54 @@ orderRouter.post("/orderPlaced", async (req, res) => {
     }
 });
 
-//     change the status of the item
-// orderRouter.post("/changestatus", validate, async (req, res) => {
-//     const { status, orderId } = req.body;
-//     try {
-//         if (status === "Delivered") {
-//             const order = await OrderModel.updateOne(
-//                 { _id: orderId },
-//                 { $set: { currentStatus: status, OrderDelivered: true } }
-//             );
-//             return res.status(200).send("Order Delivered");
-//         }
 
-//         const order = await OrderModel.findByIdAndUpdate(
-//             { _id: orderId },
-//             { $set: { currentStatus: status } }
-//         );
-//         return res.send({ "msg": "Status of order has been changed", status });
-//     } catch (e) {
-//         return res.send(e.message);
-//     }
-// });
 
+// *********************   Change order's current Status by Admin  *********************
+orderRouter.post('/changeStatusOfOrder', adminChecker, async (req, res) => {
+    const { status, orderId } = req.body;
+    try {
+        if (status === "Delivered") {
+            const order = await OrderModel.updateOne(
+                { _id: orderId },
+                { $set: { currentStatus: status, OrderDelivered: true } } // order status change here
+            );
+            return res.status(200).send({ "msg": "Status of order has been changed", status });
+        }
+        const order = await OrderModel.findByIdAndUpdate(
+            { _id: orderId },
+            { $set: { currentStatus: status } }
+        );
+        res.status(200).send({ "msg": "Status of order has been changed", status });
+    } catch (err) {
+        res.status(404).send({ Error: err.message });
+    }
+});
+
+
+// ********************* Get all the orders list of delivered item *************
+orderRouter.get("/getDeliveredOrders", async (req, res) => {
+    try {
+        let delivered = await OrderModel.find({ OrderDelivered: true }).populate({
+            path: "cartId",
+            populate: { path: "products", populate: "productId" },
+        });
+        res.status(201).send({ delivered, msg: "OK" });
+    } catch (err) {
+        res.status(404).send({ Error: err.message });
+    }
+});
+
+// ********************* Get all the orders list of Not-delivered item *************
+orderRouter.get("/getNotDeliveredOrders", async (req, res) => {
+    try {
+        let notDelivered = await OrderModel.find({ OrderDelivered: false }).populate({
+            path: "cartId",
+            populate: { path: "products", populate: "productId" },
+        });
+        res.status(201).send({ notDelivered, msg: "OK" });
+    } catch (err) {
+        res.status(404).send({ Error: err.message });
+    }
+});
 
 module.exports = { orderRouter };
