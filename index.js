@@ -11,10 +11,10 @@ const PORT = process.env.PORT || 3000; //defined port 8080 (default 3000) exclud
 const { userRouter } = require("./Routes/users.route");
 const { productRouter } = require("./Routes/product.route");
 const { cartRouter } = require("./Routes/cart.route");
+const { orderRouter } = require("./Routes/order.route");
 
-
-const { validate } = require("./Middlewares/validate.middleware"); // custom middleware for token validation
-
+// custom middleware for token validation
+const { validate } = require("./Middlewares/validate.middleware"); 
 
 //Inbuilt middlewares;
 app.use(express.text());
@@ -30,8 +30,11 @@ app.get("/", async (req, res) => {
 app.use('/users', userRouter);
 app.use('/products', productRouter);
 
+// Restricted Routes
 app.use(validate);
 app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
+
 
 //server code for start or live my server at defined port;
 httpServer.listen(PORT, async () => {

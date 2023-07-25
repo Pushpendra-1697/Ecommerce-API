@@ -64,16 +64,14 @@ Collection Name : orders
   DeliveryDate: String,
 
 
-
-
 # Routes / End Points
-1) /users/register:
+1) /users/register: (POST)
 Sample Input: 
  name: "Pushpendra Singh"
  password: "Push1697@"
 Output: Success Message and data will store in mongodb
 
-2) /users/login:
+2) /users/login: (POST)
 if you use same existing details for login then you got jwt token, Login Successfully Message and user_id
 else you got Wrong Password || Wrong Username || Login failed (according to your wrong credential)
 
@@ -92,7 +90,7 @@ Sample Input:
  password: "Push"
 Output: Wrong Password
 
-3) /products/addProduct:
+3) /products/addProduct: (POST)
 Sample Input:
   "id": 922,
   "brand": "nyx",
@@ -110,18 +108,14 @@ Sample Input:
 
 Output: Success Message and data will store in mongodb
 
-4) /products/allProducts:
+4) /products/allProducts: (GET)
 Output: Retrieves all products
 
-5) /products/particularProduct/`${id}`
+5) /products/particularProduct/`${id}`: (GET)
 output: Retrieves Particular products by id
 
-# NOTE : Ignore Payment Gateway Methods API like Razorpay, Braintree etc.
-
-6) 
-
 # NOTE:  For Below routes pass the token from headers (Required)
-6) /cart/addToCart: update quantities
+6) /cart/addToCart: update quantities --> (POST)
 Input Sample: 
   "productId":"64be95a1f0dd493feb5c8210",
   "qty": 3
@@ -146,13 +140,46 @@ Output:
   }
 }
 
-7) /cart/deleteFromCart:
+7) /cart/deleteFromCart: (DELETE)
 Input Sample: 
   productId: "64be95a1f0dd493feb5c8210"
   cartId: "64bebf684ac081d8292327a8"
 
 Output: Particular Product will be deleted
 
-8) /cart/fetchCartItems:
+8) /cart/fetchCartItems: (GET)
 It will populate all cart Items || Empty Cart
+
+# NOTE : Ignore Payment Gateway Methods API like Razorpay, Braintree etc.
+9) /order/orderPlaced: (POST)
+Input Sample: 
+{
+  "cartId": "64bebf684ac081d8292327a8",
+  "priceTotal": 36, 
+  "paymentMethod":"Net Banking",
+  "DeliveryAdress":"Kanpur UP"
+}
+
+Output: 
+{
+  "msg": "OK",
+  "newOrder": {
+    "userId": "64be861288ff9ba7252aa32e",
+    "cartId": "64bebf684ac081d8292327a8",
+    "status": [
+      "orderconfirmed"
+    ],
+    "currentStatus": "orderconfirmed",
+    "priceTotal": 36,
+    "paymentMethod": "Net Banking",
+    "DeliveryAdress": "Kanpur UP",
+    "OrderDelivered": false,
+    "DeliveryDate": "29/07/2023",
+    "_id": "64bf4d78a141a7319b7aa1e7",
+    "createdAt": "2023-07-25T04:20:08.451Z",
+    "updatedAt": "2023-07-25T04:20:08.451Z"
+  }
+}
+
+
 
