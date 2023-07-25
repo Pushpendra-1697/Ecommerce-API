@@ -74,38 +74,38 @@ Collection Name : users
 3) carts:
 Collection Name : carts
 
-  userId : ObjectId as ref=user
+  - userId : ObjectId as ref=user
 
-  products: [{productId: ObjectId as ref=product, quantity: Number, default:1}]
+ -  products: [{productId: ObjectId as ref=product, quantity: Number, default:1}]
   
-  active: Boolean, default: true
+ - active: Boolean, default: true
   
-  modifiedOn: Date, default: Date.now
+ - modifiedOn: Date, default: Date.now
 
 5) orders:
 Collection Name : orders
 
-  userId : ObjectId as ref=user
+ - userId : ObjectId as ref=user
   
-  cartId : ObjectId as ref=cart
+ - cartId : ObjectId as ref=cart
   
-  status : Array
+ - status : Array
   
-  currentStatus : String
+ - currentStatus : String
   
-  priceTotal: Number
+ - priceTotal: Number
   
-  paymentMethod: String
+ - paymentMethod: String
   
-  DeliveryAdress: String
+ - DeliveryAdress: String
   
-  OrderDelivered: Boolean, default: false
+ - OrderDelivered: Boolean, default: false
   
-  DeliveryDate: String,
+ - DeliveryDate: String,
 
 
 # Routes / End Points
-1) /users/register: (POST)
+#### 1. */users/register*: (POST)
 
 Sample Input: 
 
@@ -115,7 +115,8 @@ Sample Input:
  
 Output: Success Message and data will store in mongodb
 
-3) /users/login: (POST)
+#### 2.  */users/login*: (POST)
+
 if you use same existing details for login then you got jwt token, Login Successfully Message and user_id
 else you got Wrong Password || Wrong Username || Login failed (according to your wrong credential)
 
@@ -143,7 +144,7 @@ Sample Input:
  
 Output: Wrong Password
 
-3) /products/addProduct: (POST)
+#### 3) */products/addProduct*: (POST)
 
 Sample Input:
 
@@ -165,14 +166,16 @@ Sample Input:
 
 Output: Success Message and data will store in mongodb
 
-4) /products/allProducts: (GET)
+#### 4) */products/allProducts*: (GET)
 Output: Retrieves all products
 
-5) /products/particularProduct/`${id}`: (GET)
+#### 5) */products/particularProduct/`${id}`*: (GET)
 output: Retrieves Particular products by id
 
-# NOTE:  For Below routes pass the token from headers (Required)
-6) /cart/addToCart: update quantities --> (POST)
+## NOTE:  For Below routes pass the token from headers (Required)
+
+#### 6) */cart/addToCart: update quantities* --> (POST)
+
 Input Sample: 
   "productId":"64be95a1f0dd493feb5c8210",
   "qty": 3
@@ -197,18 +200,21 @@ Output:
   }
 }
 
-7) /cart/deleteFromCart: (DELETE)
+#### 7) */cart/deleteFromCart*: (DELETE)
+
 Input Sample: 
   productId: "64be95a1f0dd493feb5c8210"
   cartId: "64bebf684ac081d8292327a8"
 
 Output: Particular Product will be deleted
 
-8) /cart/fetchCartItems: (GET)
+#### 8) */cart/fetchCartItems*: (GET)
 It will populate all cart Items || Empty Cart
 
-# NOTE : Ignore Payment Gateway Methods API like Razorpay, Braintree etc.
-9) /order/orderPlaced: (POST)
+## NOTE : Ignore Payment Gateway Methods API like Razorpay, Braintree etc.
+
+#### 9) */order/orderPlaced*: (POST)
+
 Input Sample: 
 {
   "cartId": "64bebf684ac081d8292327a8",
@@ -238,15 +244,17 @@ Output:
   }
 }
 
-10) /order/orderHistory : (GET)
+#### 10) */order/orderHistory* : (GET)
+
 Used to get all orders of authenticated users (notDelivered orders)
 
-11) /order/orderDetails : (GET)
+#### 11) */order/orderDetails* : (GET)
 Used to get particular order's Details of any authenticated particular user by order's ID (notDelivered order)
 
-# NOTE: Some Extra Routes
+## NOTE: Some Extra Routes
 
-12) /order/changeStatusOfOrder: (POST)
+#### 12) */order/changeStatusOfOrder*: (POST)
+
 Used for Change order's current Status by Admin --> This person should have token + role=="admin"
 
 Input Sample-1: 
@@ -273,14 +281,17 @@ Output-2:
   "status": "Shipping"
 }
 
-13) /order/getDeliveredOrders : (GET)
+#### 13) */order/getDeliveredOrders* : (GET)
+
 Used to get all the orders  list  of delivered item which have OrderDelivered===true
 
 
-14) /order/getNotDeliveredOrders : (GET)
+#### 14) */order/getNotDeliveredOrders* : (GET)
+
 Used to get all the orders  list  of Not-delivered item which have OrderDelivered===false
 
-# NOTE :  API rate limiting to prevent abuse and maintain server stability.
+## NOTE :  API rate limiting to prevent abuse and maintain server stability.
+
 API RATE LIMIT use for amount of time and no.of req valid for yr app
 
 middleware --> express-rate-limit
