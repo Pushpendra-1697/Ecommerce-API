@@ -28,7 +28,7 @@ Clone the Repository from Github. Then do the following steps:
 
 204 ----> Delete/reject
 
-# NOTE: Used Timestamps & Date datatypes which allow by BSON.
+## NOTE: Used Timestamps & Date datatypes which allow by BSON.
 
 # Database Name:
 ecommerce
