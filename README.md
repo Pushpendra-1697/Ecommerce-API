@@ -7,7 +7,7 @@ Clone the Repository from Github. Then do the following steps:
 ```bash
     npm init -y
 
-    npm i express mongoose cors bcrypt dotenv jsonwebtoken nodemon
+    npm i express mongoose cors bcrypt dotenv jsonwebtoken nodemon express-rate-limit
 ```
 # To run server (PORT = 8080)
 ```bash
@@ -223,4 +223,17 @@ Used to get all the orders  list  of delivered item which have OrderDelivered===
 14) /order/getNotDeliveredOrders : (GET)
 Used to get all the orders  list  of Not-delivered item which have OrderDelivered===false
 
+# NOTE :  API rate limiting to prevent abuse and maintain server stability.
+API RATE LIMIT use for amount of time and no.of req valid for yr app
 
+middleware --> express-rate-limit
+
+Example: 
+const limiter = rateLimit({
+    max: 2, //no. of req users can make with in time
+    windowMs: 60000  // time frame in (ms)
+});
+
+app.use(limiter);
+
+After 60000ms you got Error: "Too many requests, please try again later" with 429 status code if you try to make more than 2 requests.

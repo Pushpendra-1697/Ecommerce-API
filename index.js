@@ -13,16 +13,21 @@ const { productRouter } = require("./Routes/product.route");
 const { cartRouter } = require("./Routes/cart.route");
 const { orderRouter } = require("./Routes/order.route");
 
-// custom middleware for token validation
-const { validate } = require("./Middlewares/validate.middleware"); 
+// some custom middlewares
+const { validate } = require("./Middlewares/validate.middleware");
+const { limiter } = require("./Middlewares/apiRateLimit.middleware");
 
 //Inbuilt middlewares;
 app.use(express.text());
 app.use(express.json());
 app.use(cors());
 
+app.use(limiter);
+
 //Landing/default route;
 app.get("/", async (req, res) => {
+    const ip = req.ip;
+    console.log(ip);
     res.send("Welcome in Ecommerce-API App😊!!!");
 });
 
