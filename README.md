@@ -107,9 +107,9 @@ Collection Name : orders
  - DeliveryDate: String,
 
 
-### NOTE: I used Thunder Client Extension for testing all REST APIs.
+## NOTE: I used Thunder Client Extension for testing all REST APIs.
 
-# Routes / End Points tested by Thunder Client Extension :
+### Routes / End Points tested by Thunder Client Extension :
 
 #### 1. */users/register*: (POST)
 
