@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+// **************** Product Schema with product collection ****************
 const ProductSchema = new Schema({
   id: { type: Number, unique: true },
   brand: String,

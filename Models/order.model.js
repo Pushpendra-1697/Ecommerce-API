@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+// **************** Order Schema with order collection ****************
 const OrderSchema = new Schema(
     {
         userId: {

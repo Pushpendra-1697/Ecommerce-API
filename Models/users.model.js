@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-//Schema/blueprint of user
+// **************** User Schema/blueprint with user collection ****************
 const userSchema = new Schema(
     {
         name: { type: String, required: true },

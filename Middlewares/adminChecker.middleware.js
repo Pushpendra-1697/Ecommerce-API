@@ -1,3 +1,5 @@
+// **************** Middleware used for Checking Admin (or) User ****************
+
 const adminChecker = (req, res, next) => {
     const { role } = req.headers;
     if (role == "admin") {

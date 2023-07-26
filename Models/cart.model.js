@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+// **************** Cart Schema with cart collection ****************
 const CartSchema = new Schema(
     {
         userId: {

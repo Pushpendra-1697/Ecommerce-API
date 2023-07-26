@@ -1,4 +1,4 @@
-//middleware for validate Unauthorized user
+// **************** middleware for validate Unauthorized user ****************
 const validate = (req, res, next) => {
     const { token } = req.headers;
     if (token) {

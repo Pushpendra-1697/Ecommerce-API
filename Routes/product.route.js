@@ -2,6 +2,7 @@ const { Router } = require('express');
 const ProductModel = require('../Models/product.model');
 const productRouter = Router();
 
+// **************** Used to retrieves all products   ****************
 productRouter.get('/allProducts', async (req, res) => {
     let query = req.query;
 
@@ -13,6 +14,7 @@ productRouter.get('/allProducts', async (req, res) => {
     }
 });
 
+// **************** Used to retrieves Particular products by id   ****************
 productRouter.get('/particularProduct/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -23,6 +25,7 @@ productRouter.get('/particularProduct/:id', async (req, res) => {
     }
 });
 
+// **************** Used to add a product and store in your mongoDB   ****************
 productRouter.post('/addProduct', async (req, res) => {
     let payload = req.body;
 
