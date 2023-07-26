@@ -257,7 +257,7 @@ It will populate all cart Items || Empty Cart
 Used to get all orders of authenticated users.
 
 #### 11) */order/orderDetails* : (GET)
-Used to get particular order's details of any authenticated particular user by order's ID.
+Used to get particular order details of any authenticated particular user by order ID.
 
 ## NOTE: Some Extra Routes
 
