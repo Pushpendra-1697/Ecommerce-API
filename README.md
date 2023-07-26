@@ -154,21 +154,33 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 
 ##### Sample Input:
 
-  {
+{
   "id": 922,
+  
   "brand": "nyx",
+  
   "name": "High Definition Blush Pro Refills",
+  
   "price": 6,
+  
   "price_sign": "₹",
+  
   "image_link": "https://www.nyxcosmetics.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-cpd-nyxusa-master-catalog/default/dw587b93a7/ProductImages/Face/High_Definition_Pro_Blush_Refills/highdefinitionproblushrefills_main.jpg?sw=390&sh=390&sm=fit",
+  
   "image_link1": "//s3.amazonaws.com/donovanbailey/products/api_featured_images/000/000/915/original/open-uri20171224-4-uv4oww?1514082622",
+  
   "description": "Add a touch of color with our creamy and extremely pigmented Stick Blush! Available in eight rich shades! Apply and receive the perfect glow every day!",
+  
   "rating": 5,
+  
   "review": 9,
+  
   "category": "concealer",
+  
   "product_type": "blush",
+  
   "quantity": 5
-  }
+}
 
 ##### Output: Success Message and data will store in MongoDB
 
@@ -183,9 +195,8 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 #### 6) */cart/addToCart: update quantities* --> (POST)
 
 ##### Input Sample: 
-  {"productId":"64be95a1f0dd493feb5c8210",
-  "qty": 3}
-
+  - productId:"64be95a1f0dd493feb5c8210",
+  -  "qty": 3
 ##### Output:  
 {
   "msg": "Product added in cart",
@@ -209,8 +220,8 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 #### 7) */cart/deleteFromCart*: (DELETE)
 
 ##### Input Sample: 
-  {productId: "64be95a1f0dd493feb5c8210"
-  cartId: "64bebf684ac081d8292327a8"}
+  - productId: "64be95a1f0dd493feb5c8210"
+  - cartId: "64bebf684ac081d8292327a8"
 
 ##### Output: Particular Product will be deleted
 
@@ -223,12 +234,10 @@ It will populate all cart Items || Empty Cart
 
 ##### Input Sample: 
 
-{
-  "cartId": "64bebf684ac081d8292327a8",
-  "priceTotal": 36, 
-  "paymentMethod":"Net Banking",
-  "DeliveryAdress":"Kanpur UP"
-}
+  - cartId: "64bebf684ac081d8292327a8",
+  - priceTotal: 36, 
+  - paymentMethod:"Net Banking",
+  - DeliveryAdress:"Kanpur UP"
 
 ##### Output: 
 
@@ -263,14 +272,12 @@ Used to get particular order details of any authenticated particular user by ord
 
 #### 12) */order/changeStatusOfOrder*: (POST)
 
-Used for Change order's current Status by Admin --> This person should have token + role=="admin"
+Used for Change order's current Status by Admin --> This person should have token + role===admin
 
 ##### Input Sample-1: 
 
-{
-  "status": "Delivered",
-  "orderId": "64bf4d78a141a7319b7aa1e7"
-}
+  - status: "Delivered",
+  - orderId: "64bf4d78a141a7319b7aa1e7"
 
 ##### Output-1: 
 
@@ -281,10 +288,8 @@ Used for Change order's current Status by Admin --> This person should have toke
 
 ##### Input Sample-2: 
 
-{
-  "status": "Shipping",
-  "orderId": "64bf4d78a141a7319b7aa1e7"
-}
+  - status: "Shipping",
+  - orderId: "64bf4d78a141a7319b7aa1e7"
 
 ##### Output-2: 
 
@@ -304,16 +309,13 @@ Used to get all the orders  list  of Not-delivered items which have OrderDeliver
 
 ## NOTE:  API rate limiting to prevent abuse and maintain server stability.
 
-API RATE LIMIT used for the amount of time and no.of req valid for yr app
+API RATE LIMIT used for the amount of time and no.of req valid for your application
 
 middleware --> express-rate-limit
 
-##### Example: 
-const limiter = rateLimit({
-    max: 2, //no. of req users can make within the time
-    windowMs: 60000  // time frame in (ms)
-});
-
-app.use(limiter);
+##### Example Which I set in this assignment: 
+    - max: 2, //no. of req users can make within the time
+    - windowMs: 60000  // time frame in (ms)
 
 After 60000ms you got the Error: "Too many requests, please try again later" with a 429 status code if you try to make more than 2 requests.
+##### So Finally you can make 2 requests in 1 Minute
