@@ -18,7 +18,7 @@ orderRouter.get("/orderHistory", async (req, res) => {
 });
 
 
-// ********************* Get Order details of particluar authenticated user by particular order Id (notDelivered order) *********************
+// ********************* Get Order details of particluar authenticated user by particular order Id *********************
 orderRouter.get("/orderDetails", async (req, res) => {
     let { token } = req.headers;
     token = jwt.decode(token, process.env.secret_key);
