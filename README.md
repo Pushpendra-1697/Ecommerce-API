@@ -26,7 +26,9 @@ Clone the Repository from Github. Then do the following steps:
 
      201 ---> Created/post
 
-     204 ----> Delete/reject
+     202 ----> Delete Successfully
+
+     204 ----> Delete Failure
 
 ### NOTE: Used Timestamps & Date datatypes which allow by BSON.
 

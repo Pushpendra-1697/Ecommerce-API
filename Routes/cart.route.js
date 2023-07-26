@@ -3,7 +3,7 @@ const cartRouter = Router();
 const jwt = require("jsonwebtoken");
 let CartModel = require("../Models/cart.model");
 
-// fetching cart items*********************
+// ************** fetching cart items *********************
 cartRouter.get("/fetchCartItems", async (req, res) => {
     let { token } = req.headers;
     token = jwt.decode(token, process.env.secret_key);
@@ -23,7 +23,7 @@ cartRouter.get("/fetchCartItems", async (req, res) => {
     }
 });
 
-// **************add to cart*********************
+// ************** add to cart *********************
 cartRouter.post("/addToCart", async (req, res) => {
     let { token } = req.headers;
     let { productId, qty } = req.body;
@@ -53,7 +53,7 @@ cartRouter.post("/addToCart", async (req, res) => {
     }
 });
 
-// ****************Remove from Cart******************
+// **************** Remove from Cart ******************
 cartRouter.post("/deleteFromCart", async (req, res) => {
     let { token } = req.headers;
     let { productId, cartId } = req.body;
@@ -72,7 +72,7 @@ cartRouter.post("/deleteFromCart", async (req, res) => {
                 cart.products.splice(itemIndex, 1);
             }
             await cart.save();
-            res.status(201).send({ msg: "Remove a product from cart", cart });
+            res.status(202).send({ msg: "Remove a product from cart", cart });
         }
     } catch (err) {
         res.status(404).send({ Error: err.message });
