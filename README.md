@@ -20,8 +20,7 @@ Clone the Repository from Github. Then do the following steps:
 ```
 
 ## Some HTTP (Hyper Text Transfer Protocol) Status Code Which I used :
-     404 ---> Not Found/failure
-
+     
      200 --->  OK/Success/get/put
 
      201 ---> Created/post
@@ -29,6 +28,8 @@ Clone the Repository from Github. Then do the following steps:
      202 ----> Delete Successfully
 
      204 ----> Delete Failure
+
+     404 ---> Not Found/failure
 
 ### NOTE: Used Timestamps & Date datatypes which allow by BSON.
 
