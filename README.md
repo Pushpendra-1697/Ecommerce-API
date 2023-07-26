@@ -1,13 +1,13 @@
-# Ecommerce-API
+# E-commerce-API
 # Overview
-This project will deliver a comprehensive e-commerce API set that enables seamless product and category management, user authentication, secure cart management, and order processing. The integration of Mongodb as the database and token management system ensures efficient data storage and user authentication with minimal server-side setup.
+This project will deliver a comprehensive e-commerce API set that enables seamless product and category management, user authentication, secure cart management, and order processing. The integration of MongoDB as the database and token management system ensures efficient data storage and user authentication with minimal server-side setup.
 
-## Live/deploy link on render
+## Live/deploy link on the render
 https://ecommerce-api-ao7n.onrender.com/
 
 ## Installation & Tech Stack
 
-Clone the Repository from Github. Then do the following steps:
+Clone the Repository from GitHub. Then do the following steps:
 
 ```bash
     npm init -y
@@ -39,14 +39,14 @@ ecommerce
 
 #### 1) *Users*:
 
-Collection Name : users
+Collection Name: users
 
 - name --> String
 
 - password --> String
 
 #### 2) *products*:
-  Collection Name : products
+  Collection Name: products
 
    - id: Number,
   
@@ -75,9 +75,9 @@ Collection Name : users
    - quantity: Number,
 
 #### 3) *carts*:
-Collection Name : carts
+Collection Name: carts
 
-  - userId : ObjectId as ref=user
+  - userId: ObjectId as ref=user
 
  -  products: [{productId: ObjectId as ref=product, quantity: Number, default:1}]
   
@@ -86,13 +86,13 @@ Collection Name : carts
  - modifiedOn: Date, default: Date.now
 
 #### 4) *orders*:
-Collection Name : orders
+Collection Name: orders
 
- - userId : ObjectId as ref=user
+ - userId: ObjectId as ref=user
   
- - cartId : ObjectId as ref=cart
+ - cartId: ObjectId as ref=cart
   
- - status : Array
+ - status: Array
   
  - currentStatus : String
   
@@ -119,11 +119,11 @@ Collection Name : orders
 
  password: "Push1697@"
  
-##### Output: Success Message and data will store in mongodb
+##### Output: Success Message and data will store in MongoDB
 
 #### 2.  */users/login*: (POST)
 
-if you use same existing details for login then you got jwt token, Login Successfully Message and user_id
+if you use the same existing details for login then you got the JWT token, Login Successfully Message and user_id
 else you got Wrong Password || Wrong Username || Login failed (according to your wrong credential)
 
 ##### Sample Input: 
@@ -132,7 +132,7 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
  
  password: "Push1697@"
  
-##### Output: Success Message and jwt token
+##### Output: Success Message and JSON web token
 
 ##### Sample Input: 
 
@@ -170,7 +170,7 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
   "quantity": 5
   }
 
-##### Output: Success Message and data will store in mongodb
+##### Output: Success Message and data will store in MongoDB
 
 #### 4) */products/allProducts*: (GET)
 ##### Output: Retrieves all products
@@ -178,7 +178,7 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 #### 5) */products/particularProduct/`${id}`*: (GET)
 ##### output: Retrieves Particular products by id
 
-## NOTE:  For Below routes pass the token from headers (Required)
+## NOTE:  For the Below routes pass the token from headers (Required)
 
 #### 6) */cart/addToCart: update quantities* --> (POST)
 
@@ -209,15 +209,15 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 #### 7) */cart/deleteFromCart*: (DELETE)
 
 ##### Input Sample: 
-  productId: "64be95a1f0dd493feb5c8210"
-  cartId: "64bebf684ac081d8292327a8"
+  {productId: "64be95a1f0dd493feb5c8210"
+  cartId: "64bebf684ac081d8292327a8"}
 
 ##### Output: Particular Product will be deleted
 
 #### 8) */cart/fetchCartItems*: (GET)
 It will populate all cart Items || Empty Cart
 
-## NOTE : Ignore Payment Gateway Methods API like Razorpay, Braintree etc.
+## NOTE: Ignore Payment Gateway Methods API like Razorpay, Braintree, etc.
 
 #### 9) */order/orderPlaced*: (POST)
 
@@ -254,10 +254,10 @@ It will populate all cart Items || Empty Cart
 
 #### 10) */order/orderHistory* : (GET)
 
-Used to get all orders of authenticated users (notDelivered orders)
+Used to get all orders of authenticated users.
 
 #### 11) */order/orderDetails* : (GET)
-Used to get particular order's Details of any authenticated particular user by order's ID (notDelivered order)
+Used to get particular order's details of any authenticated particular user by order's ID.
 
 ## NOTE: Some Extra Routes
 
@@ -295,25 +295,25 @@ Used for Change order's current Status by Admin --> This person should have toke
 
 #### 13) */order/getDeliveredOrders* : (GET)
 
-Used to get all the orders  list  of delivered item which have OrderDelivered===true
+Used to get all the orders  list  of delivered items which have OrderDelivered===true
 
 
 #### 14) */order/getNotDeliveredOrders* : (GET)
 
-Used to get all the orders  list  of Not-delivered item which have OrderDelivered===false
+Used to get all the orders  list  of Not-delivered items which have OrderDelivered===false
 
-## NOTE :  API rate limiting to prevent abuse and maintain server stability.
+## NOTE:  API rate limiting to prevent abuse and maintain server stability.
 
-API RATE LIMIT use for amount of time and no.of req valid for yr app
+API RATE LIMIT used for the amount of time and no.of req valid for yr app
 
 middleware --> express-rate-limit
 
 ##### Example: 
 const limiter = rateLimit({
-    max: 2, //no. of req users can make with in time
+    max: 2, //no. of req users can make within the time
     windowMs: 60000  // time frame in (ms)
 });
 
 app.use(limiter);
 
-After 60000ms you got Error: "Too many requests, please try again later" with 429 status code if you try to make more than 2 requests.
+After 60000ms you got the Error: "Too many requests, please try again later" with a 429 status code if you try to make more than 2 requests.
