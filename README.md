@@ -309,13 +309,13 @@ Used to get all the orders  list  of Not-delivered items which have OrderDeliver
 
 ## NOTE:  API rate limiting to prevent abuse and maintain server stability.
 
-API RATE LIMIT used for the amount of time and no.of req valid for your application
+API RATE LIMIT used for the amount of time and no.of req valid for your application.
 
 middleware --> express-rate-limit
 
 ##### Example Which I set in this assignment: 
-    - max: 2, //no. of req users can make within the time
-    - windowMs: 60000  // time frame in (ms)
+ - max: 2, //no. of req users can make within the time
+ - windowMs: 60000  // time frame in (ms)
 
 After 60000ms you got the Error: "Too many requests, please try again later" with a 429 status code if you try to make more than 2 requests.
-##### So Finally you can make 2 requests in 1 Minute
+##### So Finally you can make 2 requests in 1 Minute.
