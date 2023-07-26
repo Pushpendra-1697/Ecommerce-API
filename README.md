@@ -183,8 +183,8 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 #### 6) */cart/addToCart: update quantities* --> (POST)
 
 ##### Input Sample: 
-  "productId":"64be95a1f0dd493feb5c8210",
-  "qty": 3
+  {"productId":"64be95a1f0dd493feb5c8210",
+  "qty": 3}
 
 ##### Output:  
 {
