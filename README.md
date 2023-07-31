@@ -193,6 +193,7 @@ else you got Wrong Password || Wrong Username || Login failed (according to your
 ## NOTE:  For the Below routes pass the token from headers (Required)
 
 #### 6) */cart/addToCart: update quantities* --> (POST)
+Used for add to cart / Update quantities (default 1 quantity at first addToCart)
 
 ##### Input Sample: 
   - productId:"64be95a1f0dd493feb5c8210",
@@ -232,6 +233,8 @@ It will populate all cart Items || Empty Cart
 
 #### 9) */order/orderPlaced*: (POST)
 
+Used for orderconfirmed / Order Placement by particluar authenticated user
+
 ##### Input Sample: 
 
   - cartId: "64bebf684ac081d8292327a8",
@@ -261,14 +264,17 @@ It will populate all cart Items || Empty Cart
   }
 }
 
-#### 10) */order/orderHistory* : (GET)
 
-Used to get all orders of authenticated users.
 
-#### 11) */order/orderDetails* : (GET)
-Used to get particular order details of any authenticated particular user by order ID.
+#### 10) */order/orderDetails* : (GET)
+Used to get Order details of particular authenticated user by order ID.
 
-## NOTE: Some Extra Routes
+
+## NOTE: Some Extra Routes which is accessible by only role===admin
+
+#### 11) */order/orderHistory* : (GET)
+
+Used to get all orders of authenticated users by admin.
 
 #### 12) */order/changeStatusOfOrder*: (POST)
 
@@ -300,12 +306,12 @@ Used for Change order's current Status by Admin --> This person should have toke
 
 #### 13) */order/getDeliveredOrders* : (GET)
 
-Used to get all the orders  list  of delivered items which have OrderDelivered===true
+Used to get all the orders  list  of delivered items by admin which have OrderDelivered===true
 
 
 #### 14) */order/getNotDeliveredOrders* : (GET)
 
-Used to get all the orders  list  of Not-delivered items which have OrderDelivered===false
+Used to get all the orders  list  of Not-delivered items by admin which have OrderDelivered===false
 
 ## NOTE:  API rate limiting to prevent abuse and maintain server stability.
 
