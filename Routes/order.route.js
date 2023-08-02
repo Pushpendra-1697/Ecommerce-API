@@ -4,38 +4,27 @@ const OrderModel = require("../Models/order.model");
 const { adminChecker } = require("../Middlewares/adminChecker.middleware");
 const orderRouter = Router();
 
-// *********************   Get all orders of authenticated users  *********************
-orderRouter.get("/orderHistory", async (req, res) => {
-    try {
-        let orders = await OrderModel.find().populate({
-            path: "cartId",
-            populate: { path: "products", populate: "productId" },
-        });
-        res.status(201).send({ orders, msg: "OK" });
-    } catch (err) {
-        res.status(404).send({ Error: err.message });
-    }
-});
 
+// *********************  User work *********************
 
-// ********************* Get Order details of particluar authenticated user by particular order Id *********************
+// ********************* Get Order details of particluar authenticated user *********************
 orderRouter.get("/orderDetails", async (req, res) => {
     let { token } = req.headers;
     token = jwt.decode(token, process.env.secret_key);
     let userId = token.id;
 
     try {
-        let notDelivered = await OrderModel.find({ userId }).populate({
+        let order = await OrderModel.find({ userId }).populate({
             path: "cartId",
             populate: { path: "products", populate: "productId" },
         });
-        res.status(201).send({ notDelivered, msg: "OK" });
+        res.status(201).send({ order, msg: "OK" });
     } catch (err) {
         res.status(404).send({ Error: err.message });
     }
 });
 
-// *********************  orderconfirmed / Order Placement *********************
+// *********************  orderconfirmed / Order Placement by particluar authenticated user *********************
 orderRouter.post("/orderPlaced", async (req, res) => {
     let { token } = req.headers;
     const { priceTotal, paymentMethod, DeliveryAdress, cartId } = req.body;
@@ -67,8 +56,13 @@ orderRouter.post("/orderPlaced", async (req, res) => {
 
 
 
+
+
+
+// *********************  Admin work *********************
+orderRouter.use(adminChecker);
 // *********************   Change order's current Status by Admin  *********************
-orderRouter.post('/changeStatusOfOrder', adminChecker, async (req, res) => {
+orderRouter.post('/changeStatusOfOrder', async (req, res) => {
     const { status, orderId } = req.body;
     try {
         if (status === "Delivered") {
@@ -80,7 +74,7 @@ orderRouter.post('/changeStatusOfOrder', adminChecker, async (req, res) => {
         }
         const order = await OrderModel.findByIdAndUpdate(
             { _id: orderId },
-            { $set: { currentStatus: status } }
+            { $set: { currentStatus: status, OrderDelivered: false } }
         );
         res.status(200).send({ "msg": "Status of order has been changed", status });
     } catch (err) {
@@ -88,8 +82,20 @@ orderRouter.post('/changeStatusOfOrder', adminChecker, async (req, res) => {
     }
 });
 
+// *********************   Get all orders of authenticated users by admin *********************
+orderRouter.get("/orderHistory", async (req, res) => {
+    try {
+        let orders = await OrderModel.find().populate({
+            path: "cartId",
+            populate: { path: "products", populate: "productId" },
+        });
+        res.status(201).send({ orders, msg: "OK" });
+    } catch (err) {
+        res.status(404).send({ Error: err.message });
+    }
+});
 
-// ********************* Get all the orders list of delivered item *************
+// ********************* Get all the orders list of delivered item by admin *************
 orderRouter.get("/getDeliveredOrders", async (req, res) => {
     try {
         let delivered = await OrderModel.find({ OrderDelivered: true }).populate({
@@ -102,7 +108,7 @@ orderRouter.get("/getDeliveredOrders", async (req, res) => {
     }
 });
 
-// ********************* Get all the orders list of Not-delivered item *************
+// ********************* Get all the orders list of Not-delivered item by admin *************
 orderRouter.get("/getNotDeliveredOrders", async (req, res) => {
     try {
         let notDelivered = await OrderModel.find({ OrderDelivered: false }).populate({

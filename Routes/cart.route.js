@@ -3,7 +3,7 @@ const cartRouter = Router();
 const jwt = require("jsonwebtoken");
 let CartModel = require("../Models/cart.model");
 
-// ************** fetching cart items *********************
+// ************** fetching cart items of particular user *********************
 cartRouter.get("/fetchCartItems", async (req, res) => {
     let { token } = req.headers;
     token = jwt.decode(token, process.env.secret_key);
@@ -23,7 +23,7 @@ cartRouter.get("/fetchCartItems", async (req, res) => {
     }
 });
 
-// ************** add to cart *********************
+// ************** add to cart / Update quantities (default 1 quantity at first addToCart) *********************
 cartRouter.post("/addToCart", async (req, res) => {
     let { token } = req.headers;
     let { productId, qty } = req.body;
